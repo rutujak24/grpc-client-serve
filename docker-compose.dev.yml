@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # Key-Value Storage gRPC Service - Development
+  kv-service-dev:
+    build:
+      context: .
+      dockerfile: docker/kv-service/Dockerfile
+      target: builder
+    container_name: kv-service-dev
+    environment:
+      - KV_SERVICE_PORT=:50051
+    ports:
+      - "50051:50051"
+    volumes:
+      - .:/app
+      - /app/vendor
+    networks:
+      - kvstore-network
+    command: ["go", "run", "./cmd/kv-service"]
+    restart: unless-stopped
+
+  # REST API Service - Development
+  api-service-dev:
+    build:
+      context: .
+      dockerfile: docker/api-service/Dockerfile
+      target: builder
+    container_name: api-service-dev
+    environment:
+      - API_SERVICE_PORT=:8080
+      - KV_SERVICE_ADDR=kv-service-dev:50051
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - /app/vendor
+    networks:
+      - kvstore-network
+    depends_on:
+      - kv-service-dev
+    command: ["go", "run", "./cmd/api-service"]
+    restart: unless-stopped
+
+networks:
+  kvstore-network:
+    driver: bridge
