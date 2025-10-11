@@ -9,9 +9,9 @@ A simple decomposed key-value store implementation with two services communicati
 
 ```
 ┌─────────────────┐    HTTP/JSON    ┌─────────────────┐    gRPC    ┌─────────────────┐
-│                 │ ◄───────────── │                 │ ◄───────── │                 │
-│   HTTP Client   │                │   API Service   │            │   KV Service    │
-│                 │ ───────────────► │                 │ ──────────► │                 │
+│                 │ ◄─────────────  │                 │ ◄───────── │                 │
+│   HTTP Client   │                 │   API Service   │            │   KV Service    │
+│                 │ ───────────────►│                 │ ──────────►│                 │
 └─────────────────┘                 └─────────────────┘            └─────────────────┘
                                            :8080                         :50051
 ```
