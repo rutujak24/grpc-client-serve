@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package kvstore;
+
+option go_package = "github.com/rutujak24/grpc-client-serve/proto";
+
+// KeyValueStore service defines the gRPC interface for key-value operations
+service KeyValueStore {
+  // Store saves a key-value pair
+  rpc Store(StoreRequest) returns (StoreResponse);
+  
+  // Retrieve gets the value for a given key
+  rpc Retrieve(RetrieveRequest) returns (RetrieveResponse);
+  
+  // Delete removes a key-value pair
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+}
+
+// StoreRequest contains the key-value pair to store
+message StoreRequest {
+  string key = 1;
+  string value = 2;
+}
+
+// StoreResponse confirms the store operation
+message StoreResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// RetrieveRequest contains the key to retrieve
+message RetrieveRequest {
+  string key = 1;
+}
+
+// RetrieveResponse contains the retrieved value
+message RetrieveResponse {
+  bool found = 1;
+  string value = 2;
+  string message = 3;
+}
+
+// DeleteRequest contains the key to delete
+message DeleteRequest {
+  string key = 1;
+}
+
+// DeleteResponse confirms the delete operation
+message DeleteResponse {
+  bool success = 1;
+  string message = 2;
+}
