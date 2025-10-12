@@ -13,7 +13,7 @@ A simple decomposed key-value store implementation with two services communicati
 │   HTTP Client   │                 │   API Service   │            │   KV Service    │
 │                 │ ───────────────►│                 │ ──────────►│                 │
 └─────────────────┘                 └─────────────────┘            └─────────────────┘
-                                           :8080                         :50051
+                                           :8081                         :50051
 ```
 
 ## Features
@@ -55,10 +55,10 @@ A simple decomposed key-value store implementation with two services communicati
 4. Test the API:
    ```bash
    # Health check
-   curl http://localhost:8080/api/v1/health
+   curl http://localhost:8081/api/v1/health
    
    # Store a key-value pair
-   curl -X POST http://localhost:8080/api/v1/kv \
+   curl -X POST http://localhost:8081/api/v1/kv \
      -H "Content-Type: application/json" \
      -d '{"key": "hello", "value": "world"}'
    
@@ -92,7 +92,7 @@ A simple decomposed key-value store implementation with two services communicati
 
 ## API Endpoints
 
-### Base URL: `http://localhost:8080/api/v1`
+### Base URL: `http://localhost:8081/api/v1`
 
 ### Store Key-Value Pair
 - **Endpoint**: `POST /kv`
@@ -169,17 +169,17 @@ A simple decomposed key-value store implementation with two services communicati
 
 3. **Try to retrieve a non-existent key**:
    ```bash
-   curl http://localhost:8080/api/v1/kv/nonexistent
+   curl http://localhost:8081/api/v1/kv/nonexistent
    ```
 
 4. **Delete the key**:
    ```bash
-   curl -X DELETE http://localhost:8080/api/v1/kv/name
+   curl -X DELETE http://localhost:8081/api/v1/kv/name
    ```
 
 5. **Verify deletion**:
    ```bash
-   curl http://localhost:8080/api/v1/kv/name
+   curl http://localhost:8081/api/v1/kv/name
    ```
 
 ### Test Scenarios
@@ -187,15 +187,15 @@ A simple decomposed key-value store implementation with two services communicati
 #### Scenario 1: Basic CRUD Operations
 ```bash
 # Store
-curl -X POST http://localhost:8080/api/v1/kv \
+curl -X POST http://localhost:8081/api/v1/kv \
   -H "Content-Type: application/json" \
   -d '{"key": "user:123", "value": "Alice"}'
 
 # Read
-curl http://localhost:8080/api/v1/kv/user:123
+curl http://localhost:8081/api/v1/kv/user:123
 
 # Update (same as store)
-curl -X POST http://localhost:8080/api/v1/kv \
+curl -X POST http://localhost:8081/api/v1/kv \
   -H "Content-Type: application/json" \
   -d '{"key": "user:123", "value": "Alice Smith"}'
 
@@ -206,24 +206,24 @@ curl -X DELETE http://localhost:8080/api/v1/kv/user:123
 #### Scenario 2: Error Handling
 ```bash
 # Empty key
-curl -X POST http://localhost:8080/api/v1/kv \
+curl -X POST http://localhost:8081/api/v1/kv \
   -H "Content-Type: application/json" \
   -d '{"key": "", "value": "test"}'
 
 # Invalid JSON
-curl -X POST http://localhost:8080/api/v1/kv \
+curl -X POST http://localhost:8081/api/v1/kv \
   -H "Content-Type: application/json" \
   -d '{"key": "test"'
 
 # Delete non-existent key
-curl -X DELETE http://localhost:8080/api/v1/kv/does-not-exist
+curl -X DELETE http://localhost:8081/api/v1/kv/does-not-exist
 ```
 
 #### Scenario 3: Load Testing
 ```bash
 # Store multiple values
 for i in {1..10}; do
-  curl -X POST http://localhost:8080/api/v1/kv \
+  curl -X POST http://localhost:8081/api/v1/kv \
     -H "Content-Type: application/json" \
     -d "{\"key\": \"test$i\", \"value\": \"value$i\"}" &
 done
@@ -231,7 +231,7 @@ wait
 
 # Retrieve all values
 for i in {1..10}; do
-  curl http://localhost:8080/api/v1/kv/test$i &
+  curl http://localhost:8081/api/v1/kv/test$i &
 done
 wait
 ```
@@ -256,7 +256,7 @@ else
 fi
 
 # Retrieve and verify
-response=$(curl -s http://localhost:8080/api/v1/kv/test)
+response=$(curl -s http://localhost:8081/api/v1/kv/test)
 found=$(echo $response | jq -r '.found')
 value=$(echo $response | jq -r '.value')
 
