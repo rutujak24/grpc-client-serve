@@ -38,8 +38,8 @@ A simple decomposed key-value store implementation with two services communicati
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/rutujak24/grpc-client-server.git
-   cd grpc-client-server
+   git clone https://github.com/rutujak24/grpc-client-serve.git
+   cd grpc-client-serve
    ```
 
 2. Start both services:
