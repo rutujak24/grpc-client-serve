@@ -1,4 +1,4 @@
-rutuja@rutuja:grpc-client-serve$ touch go.sum
+rutuja@rutuja:~/grpc-client-serve$ touch go.sum
 docker-compose up -d
 kv-service is up-to-date
 api-service is up-to-date
