@@ -309,8 +309,6 @@ fi
    ./bin/api-service
    ```
 
-### Environment Variables
-
 #### KV Service
 - `KV_SERVICE_PORT`: Port to listen on (default: `:50051`)
 
@@ -342,54 +340,6 @@ docker-compose logs -f
 docker-compose down
 ```
 
-## Troubleshooting
-
-### Common Issues
-
-1. **Connection refused between services**:
-   - Ensure KV service is running before starting API service
-   - Check network connectivity between containers
-   - Verify correct service addresses
-
-2. **Port already in use**:
-   - Check if services are already running: `docker-compose ps`
-   - Stop existing services: `docker-compose down`
-
-3. **Health check failures**:
-   - Check service logs: `docker-compose logs service-name`
-   - Verify ports are properly exposed
-
-### Logs and Monitoring
-
-```bash
-# View all logs
-docker-compose logs
-
-# View specific service logs
-docker-compose logs api-service
-docker-compose logs kv-service
-
-# Follow logs in real-time
-docker-compose logs -f
-
-# Check service health
-curl http://localhost:8080/api/v1/health
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License.
-A client and data server to do CRUD options in a server with key value storage
-
-# Problem
+<img width="1831" height="925" alt="image" src="https://github.com/user-attachments/assets/0be8e4ce-8633-46af-8d9d-a37426ff01e3" />
 
 
-# Goals
