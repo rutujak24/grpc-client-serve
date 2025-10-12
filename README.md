@@ -340,6 +340,5 @@ docker-compose logs -f
 docker-compose down
 ```
 
-<img width="1831" height="925" alt="image" src="https://github.com/user-attachments/assets/0be8e4ce-8633-46af-8d9d-a37426ff01e3" />
 
 
