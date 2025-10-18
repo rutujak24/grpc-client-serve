@@ -341,6 +341,7 @@ docker-compose down
 ```
 
 ### Internal Structure
+```
 grpc-kv-store/
 ├── proto/                    # Protocol buffer definitions
 │   └── kv.proto
@@ -369,4 +370,4 @@ grpc-kv-store/
 ├── go.sum
 ├── docker-compose.yml
 └── README.md
-
+```
