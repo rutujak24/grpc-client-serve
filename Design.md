@@ -1,15 +1,3 @@
-// If NOT in goroutine:
-signal.Notify(sigChan, os.Interrupt)
-<-sigChan  // BLOCKS HERE - server never starts!
-grpcServer.Serve(lis)  // Never reached
-
-// With goroutine:
-go func() {
-    <-sigChan  // Goroutine blocks
-}()
-grpcServer.Serve(lis)  // Main goroutine serves requests
-```
-
 **Diagram:**
 ```
 Main Goroutine              Signal Goroutine
@@ -23,7 +11,6 @@ Handle requests             [Ctrl+C pressed]
      └──────── shutdown ──────────┘
 ```
 
----
 
 ## **🏗️ CLIENT-SERVER ARCHITECTURE**
 
@@ -57,7 +44,6 @@ curl (Client)                API Service (Server)
 **Client Side:** User's browser, curl, mobile app
 **Server Side:** API Service (HTTP server on port 8080)
 
----
 
 #### **2. API Service → KV Service (gRPC Client-Server)**
 ```
@@ -73,7 +59,7 @@ API Service (Client)       KV Service (Server)
 **Client Side:** API Service uses `KeyValueServiceClient`
 **Server Side:** KV Service implements `KeyValueServiceServer`
 
----
+
 
 ### **Full Request Flow:**
 ```
@@ -94,3 +80,4 @@ API Service (Client)       KV Service (Server)
    ├─ Converts to JSON
    ↑ HTTP 200 OK
 5. User sees JSON response
+```
