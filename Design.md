@@ -12,7 +12,7 @@ Handle requests             [Ctrl+C pressed]
 ```
 
 
-## **🏗️ CLIENT-SERVER ARCHITECTURE**
+## CLIENT-SERVER ARCHITECTURE**
 
 ### **What is Client-Server?**
 ```
