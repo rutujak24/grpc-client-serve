@@ -340,5 +340,33 @@ docker-compose logs -f
 docker-compose down
 ```
 
-
+### Internal Structure
+grpc-kv-store/
+├── proto/                    # Protocol buffer definitions
+│   └── kv.proto
+├── cmd/                      # Service entry points
+│   ├── kv-service/
+│   │   └── main.go
+│   └── api-service/
+│       └── main.go
+├── internal/                 # Private application code
+│   ├── kvstore/             # KV service implementation
+│   │   ├── server.go
+│   │   └── server_test.go
+│   └── api/                 # REST API implementation
+│       ├── handler.go
+│       ├── handler_test.go
+│       └── models.go
+├── docker/                   # Docker configurations
+│   ├── kv-service/
+│   │   └── Dockerfile
+│   └── api-service/
+│       └── Dockerfile
+├── scripts/                  # Build scripts
+│   ├── generate-proto.sh
+│   └── generate-proto.ps1
+├── go.mod
+├── go.sum
+├── docker-compose.yml
+└── README.md
 
